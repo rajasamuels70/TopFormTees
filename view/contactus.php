@@ -31,3 +31,5 @@
     </form>
 </body>
 </html>
+
+<?php require_once '../view/footer.php'; ?>

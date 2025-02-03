@@ -5,8 +5,11 @@ session_set_cookie_params($lifetime, '/');
 require_once('../model/customer.php');
 session_start();
 
+
 require_once('../model/database.php');
 require_once('../model/customer_db.php');
+
+
 
 
 // Get the data from either the GET or POST collection.
@@ -54,25 +57,41 @@ else if ($controllerChoice == 'logout') {
 } 
 
 else if ($controllerChoice == 'validate_login') {
-    $emailAddress = filter_input(INPUT_POST, 'emailAddress', FILTER_VALIDATE_EMAIL);
-    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+    $emailAddress = filter_input(INPUT_POST, 'email');
+    $password = filter_input(INPUT_POST, 'password');
 
     if ($emailAddress == null || $password == null) {
         $errorMessage = "Please enter a valid email and password.";
         include('customer_login.php');
     } else {
+        // Fetch customer object from database
         $customer = CustomerDB::getCustomerByEmail_Password($emailAddress, $password);
 
-        // Check if a valid customer object is returned
-        if (!empty($customer)) {
-            $_SESSION['customer'] = $customer; // Store the logged-in customer
-            include('index.php'); // Redirect to the user list or home page
+        if ($customer !== null) {
+            // Ensure $customer is an instance of Customer before storing it in session
+            if ($customer instanceof Customer) {
+                $_SESSION['customer'] = $customer; // Store the object in session
+                header("Location: ../customer_manager/?controllerRequest=dashboard");
+                exit();
+            } else {
+                $errorMessage = "Error retrieving customer information.";
+                include('customer_login.php');
+            }
         } else {
             $errorMessage = "Incorrect email or password.";
             include('customer_login.php'); // Reload login page with error message
         }
     }
-} 
+}
+else if ($controllerChoice == 'dashboard'){
+    if (!isset($_SESSION['customer'])) {
+        header("Location: ?controllerRequest=login_user");
+        exit();
+    }
+    include('../view/header.php');  // Include the header
+    include('accountdashboard.php'); // Load the account dashboard page
+    include('../view/footer.php');  // Include the footer
+}
 else if ($controllerChoice == 'add_user') {
     $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING);
     $lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_STRING);

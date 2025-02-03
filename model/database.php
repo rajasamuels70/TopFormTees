@@ -1,6 +1,6 @@
 <?php
 
-class Database{
+class database{
     
     private static $dsn = 'mysql:host=localhost;dbname=topformtees';
     private static $username = 'mgs_user';

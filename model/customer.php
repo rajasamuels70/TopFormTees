@@ -15,6 +15,8 @@ class Customer {
     private $dateAdded;
     private $dateUpdated;
 
+    
+    
     // Constructor
     public function __construct(
         $id, $customerRoleTypeId, $firstName, $lastName, $address, $city, 

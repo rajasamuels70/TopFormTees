@@ -18,10 +18,10 @@
                 <input type="hidden" name="controllerRequest" value="validate_login">  
                 <!-- Add the code-->
                 <label>Email: </label> 
-                <input type="text" name="email" value="<?php echo isset($_COOKIE['email']) ? htmlspecialchars($_COOKIE['email']) : ''; ?>">
+                <input type="text" name="email" value="bob@email.com">
                 <br>
                 <label>Password: </label> 
-                <input type="password" name="password" value="<?php echo isset($_COOKIE['password']) ? htmlspecialchars($_COOKIE['password']) : ''; ?>"> 
+                <input type="password" name="password" value="password2"> 
                 <br>
                 <button value="Login">Login</button>
 <!--                <input type="submit" value="Login">-->

@@ -1,7 +1,7 @@
 <?php
 
 class CustomerDB{
-    public static function getCustomerByEmail_Password($emailAddress, $password){
+    public static function getCustomerByEmail_Password($emailAddress, $password) {
         $db = Database::getDB();
         $query = 'SELECT * FROM customer WHERE emailAddress = :emailAddress AND password = :password';
         $statement = $db->prepare($query);
@@ -9,13 +9,32 @@ class CustomerDB{
         $statement->bindValue(':password', $password);
         $statement->execute();
         
-         // Verify the password if the user exists
-        if ($customer && password_verify($password, $customer['password'])) {
-            return $customer; // Return customer details if credentials are valid
+        // Fetch customer data
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        $statement->closeCursor();
+
+        if ($row) {
+            // Create and return a Customer object
+            return new Customer(
+                $row['id'],
+                $row['customerRoleTypeId'],
+                $row['firstName'],
+                $row['lastName'],
+                $row['address'],
+                $row['city'],
+                $row['state'],
+                $row['zip'],
+                $row['emailAddress'],
+                $row['userName'],
+                $row['password'],
+                $row['dateAdded'],
+                $row['dateUpdated']
+            );
         }
 
-        return null; // Return null if no match is found or password is invalid
+        return null; // Return null if no match
     }
+ }
     
     
     
@@ -30,5 +49,4 @@ class CustomerDB{
     
     
     
-    
-}
+  
