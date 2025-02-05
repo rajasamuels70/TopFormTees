@@ -18,9 +18,11 @@ class Customer {
     
     
     // Constructor
+    // Constructor
     public function __construct(
-        $id, $customerRoleTypeId, $firstName, $lastName, $address, $city, 
-        $state, $zip, $emailAddress, $userName, $password, $dateAdded, $dateUpdated
+        $firstName, $lastName, $address, $city, $state, $zip, $emailAddress, 
+        $password, $userName = null, $id = null, $customerRoleTypeId = null, 
+        $dateAdded = null, $dateUpdated = null
     ) {
         $this->id = $id;
         $this->customerRoleTypeId = $customerRoleTypeId;
@@ -36,6 +38,7 @@ class Customer {
         $this->dateAdded = $dateAdded;
         $this->dateUpdated = $dateUpdated;
     }
+
 
     // Getters
     public function getId() {

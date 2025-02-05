@@ -4,6 +4,8 @@ $lifetime = 60 * 60 * 24 * 14;
 session_set_cookie_params($lifetime, '/');
 require_once('../model/customer.php');
 session_start();
+require_once('../model/order_db.php');
+
 
 
 require_once('../model/database.php');
@@ -88,31 +90,44 @@ else if ($controllerChoice == 'dashboard'){
         header("Location: ?controllerRequest=login_user");
         exit();
     }
-    include('../view/header.php');  // Include the header
+    //include('../view/header.php');  // Include the header
     include('accountdashboard.php'); // Load the account dashboard page
     include('../view/footer.php');  // Include the footer
 }
 else if ($controllerChoice == 'add_user') {
     $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING);
     $lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_STRING);
+    $emailAddress = filter_input(INPUT_POST, 'emailAddress', FILTER_VALIDATE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
     $state = filter_input(INPUT_POST, 'state', FILTER_SANITIZE_STRING);
     $postalCode = filter_input(INPUT_POST, 'postalCode', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $emailAddress = filter_input(INPUT_POST, 'emailAddress', FILTER_VALIDATE_EMAIL);
-    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-    $isActive = filter_input(INPUT_POST, 'isActive', FILTER_VALIDATE_BOOLEAN);
 
     if (empty($firstName) || empty($lastName) || empty($password)) {
         $errorMessage = "Please fill in all required fields.";
         include("customer_register.php");
     } else {
-        // Add the user to the database.
-        $user = UserDB::add_user($user);
+        // Create the customer object (you can pass it to the addCustomer method if needed)
+        $customer = new Customer($firstName, $lastName, $emailAddress, $password, $address, $city, $state, $postalCode);
 
-        // Redirect to user list after successful registration.
-        $users = UserDB::getUsers();
-        include("user_list.php");
+        // Add the user to the database
+        $result = CustomerDB::addCustomer($customer);
+
+        if ($result) {
+            // Clear session data
+            $_SESSION = array();
+            session_destroy();
+            session_start(); // Start a new session
+
+            // Redirect to login after successful registration
+            $successMessage = "Registration successful. Please log in.";
+            header("Location: customer_login.php?successMessage=" . urlencode($successMessage));
+            exit();
+        } else {
+            $errorMessage = "There was an error with your registration. Please try again.";
+            include("customer_register.php");
+        }
     }
 }
 else if ($controllerChoice == 'contact_us'){

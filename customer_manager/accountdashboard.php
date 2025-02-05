@@ -1,32 +1,37 @@
 <?php
-// Start the session to access the logged-in user's data
-//session_start();
+// Ensure session is started only if it's not already active
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
+// Ensure customer is logged in and is an instance of Customer
 if (!isset($_SESSION['customer']) || !($_SESSION['customer'] instanceof Customer)) {
     header("Location: ?controllerRequest=login_user");
     exit();
 }
 
 $customer = $_SESSION['customer'];
-?>
 
+require_once '../view/header.php';
+require_once('../model/order_db.php');
+require_once('../model/order.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Dashboard - Top Form Tees</title>
-    <link rel="stylesheet" href="main.css"> <!-- Include any external CSS -->
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <header>
         <h1>Welcome to Your Account, <?php echo htmlspecialchars($customer->getFirstName()); ?>!</h1>
         <nav>
             <ul>
-                <li><a href="account_dashboard.php">Dashboard</a></li>
+                <li><a href="customer_manager?controllerRequest=dashboard">Dashboard</a></li>
                 <li><a href="edit_account.php">Edit Account</a></li>
                 <li><a href="view_orders.php">Your Orders</a></li>
-                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -42,15 +47,16 @@ $customer = $_SESSION['customer'];
 
         <section>
             <h2>Your Orders</h2>
-            <!-- Example: Display a list of orders for this customer -->
             <?php
-            // Assuming you have an OrderDB class and method to get orders by customer ID
-            $orders = OrderDB::getOrdersByCustomerId($customer->getCustomerId());
+            // Fetch orders for the logged-in customer
+            $orders = OrderDB::getOrdersByCustomerId($customer->getId());
 
-            if ($orders) {
+            if (!empty($orders)) {
                 echo "<ul>";
                 foreach ($orders as $order) {
-                    echo "<li>Order ID: " . htmlspecialchars($order->getOrderId()) . " - Total: " . htmlspecialchars($order->getTotal()) . " - Date: " . htmlspecialchars($order->getOrderDate()) . "</li>";
+                    echo "<li>Order ID: " . htmlspecialchars($order->getOrderId()) . 
+                         " - Total: $" . htmlspecialchars(number_format($order->getTotalCost(), 2)) . 
+                         " - Date: " . htmlspecialchars($order->getDateOrdered()) . "</li>";
                 }
                 echo "</ul>";
             } else {
