@@ -113,6 +113,8 @@ else if ($controllerChoice == 'add_user') {
 
         // Add the user to the database
         $result = CustomerDB::addCustomer($customer);
+        // Redirect to the login page
+        include('customer_login.php');
 
         if ($result) {
             // Clear session data
