@@ -1,0 +1,81 @@
+/* General Page Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c; /* Dark gray background */
+    color: #d3d3d3; /* Light gray text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Registration Form Container */
+.register-container {
+    background-color: #222; /* Darker gray */
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Form Heading */
+h1 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Error and Success Messages */
+p {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+p[style*='color:red'] {
+    color: #ff6347; /* Tomato red */
+}
+
+p[style*='color:green'] {
+    color: #32cd32; /* Lime green */
+}
+
+/* Form Fields */
+label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #333; /* Darker gray */
+    border: 1px solid #555;
+    color: #d3d3d3;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+/* Submit Button */
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #000; /* Black */
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+    background-color: #444; /* Medium gray */
+}

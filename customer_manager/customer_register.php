@@ -9,6 +9,9 @@
 <?php if (isset($_GET['successMessage'])) {
     echo "<p style='color:green;'>" . htmlspecialchars($_GET['successMessage']) . "</p>";
 } ?>
+<head>
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
+    </head>
 
 <form method="POST" action="customer_manager/index.php">
     <input type="hidden" name="controllerRequest" value="add_user" /> 
