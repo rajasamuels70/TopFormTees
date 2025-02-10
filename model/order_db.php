@@ -5,7 +5,7 @@ require_once 'Order.php';
 class OrderDB {
     public static function getOrders() {
         $db = Database::getDB();
-        $query = "SELECT * FROM `order`";  // Changed table name to `orders`
+        $query = "SELECT * FROM orders ";  // Changed table name to `orders`
         $statement = $db->prepare($query);
         $statement->execute();
 
@@ -30,7 +30,7 @@ class OrderDB {
     }
     public static function getOrdersByCustomerId($customerId) {
     $db = Database::getDB();
-    $query = "SELECT * FROM `order` WHERE CustomerID = :customerId"; // Fetch orders by CustomerID
+    $query = "SELECT * FROM orders WHERE CustomerID = :customerId"; // Fetch orders by CustomerID
     $statement = $db->prepare($query);
     $statement->bindValue(':customerId', $customerId, PDO::PARAM_INT);
     $statement->execute();
@@ -55,27 +55,26 @@ class OrderDB {
     return $orders; // Return the orders associated with the customer
 }
 
-    public static function getOrderWithProduct($order_id) {  // Added parameter $order_id
+    public static function getOrderWithProduct($orderId) {
         $db = Database::getDB();
-        $sql = "SELECT o.OrderID, o.TotalCost, o.DateOrdered, 
-                       p.Name AS ProductName, oi.Quantity, oi.Price
-                FROM order o
-                JOIN orderitems oi ON o.OrderID = oi.OrderID
-                JOIN products p ON oi.ProductID = p.ProductID
-                WHERE o.OrderID = :order_id";
+        $query = "SELECT oi.Quantity, oi.Price, p.Description 
+                  FROM orderitem oi
+                  JOIN product p ON oi.ProductID = p.ProductID
+                  WHERE oi.OrderID = :orderId";
 
-        $statement = $db->prepare($sql);
-        $statement->bindValue(':order_id', $order_id, PDO::PARAM_INT); // Bind parameter correctly
+        $statement = $db->prepare($query);
+        $statement->bindValue(':orderId', $orderId, PDO::PARAM_INT);
         $statement->execute();
-        $orderDetails = $statement->fetchAll(PDO::FETCH_ASSOC); // Fetch results
-
+        $orderDetails = $statement->fetchAll(PDO::FETCH_ASSOC);
         $statement->closeCursor();
-        return $orderDetails; // Return the data
-    }
+
+    return $orderDetails;
+}
+
 
     public static function getOrderById($orderId) {
         $db = Database::getDB();
-        $query = "SELECT * FROM `order` WHERE OrderID = :orderId"; // Changed table name to `orders`
+        $query = "SELECT * FROM orders WHERE OrderID = :orderId"; // Changed table name to `orders`
         $statement = $db->prepare($query);
         $statement->bindValue(':orderId', $orderId, PDO::PARAM_INT);
         $statement->execute();
@@ -104,7 +103,7 @@ class OrderDB {
                                     $shippingState, $shippingZip, $totalCost, 
                                     $shippingFee, $tax, $paymentAuthorization) {
         $db = Database::getDB();
-        $query = "INSERT INTO `order` (CustomerID, ShippingAddress, ShippingCity, ShippingState, 
+        $query = "INSERT INTO orders (CustomerID, ShippingAddress, ShippingCity, ShippingState, 
                                        ShippingZip, TotalCost, ShippingFee, Tax, PaymentAuthorization, DateOrdered) 
                   VALUES (:customerId, :shippingAddress, :shippingCity, :shippingState, 
                           :shippingZip, :totalCost, :shippingFee, :tax, :paymentAuthorization, NOW())";
@@ -125,7 +124,7 @@ class OrderDB {
 
     public static function deleteOrder($orderId) {
         $db = Database::getDB();
-        $query = "DELETE FROM `order` WHERE OrderID = :orderId"; // Changed table name to `orders`
+        $query = "DELETE FROM orders WHERE OrderID = :orderId"; // Changed table name to `orders`
         $statement = $db->prepare($query);
         $statement->bindValue(':orderId', $orderId, PDO::PARAM_INT);
         $result = $statement->execute();
@@ -137,7 +136,7 @@ class OrderDB {
                                        $shippingState, $shippingZip, $totalCost, 
                                        $shippingFee, $tax, $paymentAuthorization) {
         $db = Database::getDB();
-        $query = "UPDATE `order` 
+        $query = "UPDATE orders 
                   SET CustomerID = :customerId, 
                       ShippingAddress = :shippingAddress, 
                       ShippingCity = :shippingCity, 

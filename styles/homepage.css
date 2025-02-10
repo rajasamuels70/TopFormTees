@@ -1,10 +1,84 @@
-
-img{
-  width: 50%;
-  margin-left: 0
-}
-.welcome {
+/* Homepage Styling */
+main {
+    padding: 40px 60px;
+    background-color: #121212; /* Dark background */
+    color: #fff;
     text-align: center;
-    padding: 50px 20px;
-    background: #e2e2e2;
+    min-height: 80vh; /* Make sure content fills most of the page */
+}
+
+/* Welcome Section */
+.welcome {
+    padding: 40px 0;
+}
+
+.welcome h2 {
+    font-size: 2rem;
+    font-family: "serif", cursive;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.welcome p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #ddd;
+}
+
+.welcome img {
+    max-width: 70%; /* Make the image responsive */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+/* Shop Now Button */
+.cta-button {
+    background: #444;
+    color: #fff;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.cta-button:hover {
+    background: #666;
+    transform: scale(1.08);
+}
+
+/* Footer */
+footer {
+    background-image: linear-gradient(to right, black 0%, gray 100%);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    border-top: 2px solid #444;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer p:first-child {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+footer p:last-child {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Hover effect for footer */
+footer p:hover {
+    color: #ff6347;
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: color 0.3s ease, transform 0.2s;
 }

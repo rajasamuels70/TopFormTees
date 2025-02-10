@@ -1,93 +1,117 @@
+/* Header Styling */
 header {
-    display: flex; /* Use flexbox for layout */
-    justify-content: space-between; /* Space out the logo and navigation */
-    align-items: center; /* Align items vertically in the center */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-image: linear-gradient(to right, black 0%, gray 100%);
     color: #fff;
-    padding: 30px 50px;
+    padding: 40px 60px; /* More padding for extra spacing */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
     margin: 0;
-    font-size: 3.5rem;
+    font-size: 3.2rem; /* Slightly smaller to balance layout */
     font-family: "serif", cursive;
+    letter-spacing: 1px;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; /* Display the navigation items in a row */
-    gap: 15px; /* Add spacing between nav items */
-}
-
-nav ul li {
-    margin: 0;
+    display: flex;
+    gap: 20px; /* More space between nav items */
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #ddd; /* Slightly lighter color on hover */
-}
-
-
-
-.cta-button {
-    background: #333;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, transform 0.2s;
+    padding: 10px 15px;
     border-radius: 5px;
 }
 
+nav ul li a:hover {
+    color: #ddd;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+/* CTA Button */
+.cta-button {
+    background: #444;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.cta-button:hover {
+    background: #666;
+    transform: scale(1.08);
+}
+
+/* Product Grid */
 .featured-products {
-    padding: 20px;
+    padding: 40px;
     text-align: center;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
 }
 
 .product-card {
-    background: #fff;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background: #1e1e1e;
+    padding: 15px;
+    border: 1px solid #444;
+    border-radius: 8px;
     text-align: center;
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.3s;
 }
+
+.product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.15);
+}
+
+/* Footer Styling */
 footer {
-    background-image: linear-gradient(to right, black 0%, gray 100%); /* Dark background */
-    color: #fff; /* White text */
-    text-align: center; /* Center the text */
-    padding: 10px; /* Add padding for spacing */
-    font-family: 'Arial', sans-serif; /* Clean font */
-    font-size: 14px; /* Adjust text size */
-    border-top: 2px solid #444; /* Subtle border on top */
+    background-image: linear-gradient(to right, black 0%, gray 100%);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    border-top: 2px solid #444;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
 }
 
 footer p {
-    margin: 5px 0; /* Add some spacing between paragraphs */
+    margin: 10px 0;
 }
 
 footer p:first-child {
-    font-weight: bold; /* Make the first paragraph stand out */
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
 footer p:last-child {
-    font-style: italic; /* Italicize the developer text */
+    font-style: italic;
+    opacity: 0.8;
 }
 
-/* Hover effect for the footer text */
+/* Hover effect for footer */
 footer p:hover {
-    color: #ff6347; /* Change color to tomato on hover */
-    cursor: pointer; /* Change cursor to pointer */
+    color: #ff6347;
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: color 0.3s ease, transform 0.2s;
 }

@@ -22,19 +22,19 @@ require_once('../model/order.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Dashboard - Top Form Tees</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" type="text/css" href="styles/dashboard.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to Your Account, <?php echo htmlspecialchars($customer->getFirstName()); ?>!</h1>
+    <div class="account-header">
+        <h1>Welcome, <?php echo htmlspecialchars($customer->getFirstName()); ?>!</h1>
         <nav>
             <ul>
                 <li><a href="customer_manager?controllerRequest=dashboard">Dashboard</a></li>
                 <li><a href="edit_account.php">Edit Account</a></li>
                 <li><a href="view_orders.php">Your Orders</a></li>
-            </ul>
+            </ul>   
         </nav>
-    </header>
+    </div>
 
     <main>
         <section>
@@ -52,13 +52,40 @@ require_once('../model/order.php');
             $orders = OrderDB::getOrdersByCustomerId($customer->getId());
 
             if (!empty($orders)) {
-                echo "<ul>";
+                echo "<table border='1'>";
+                echo "<tr>
+                        <th>Order ID</th>
+                        <th>Total Cost</th>
+                        <th>Date Ordered</th>
+                        <th>Products</th>
+                      </tr>";
+
                 foreach ($orders as $order) {
-                    echo "<li>Order ID: " . htmlspecialchars($order->getOrderId()) . 
-                         " - Total: $" . htmlspecialchars(number_format($order->getTotalCost(), 2)) . 
-                         " - Date: " . htmlspecialchars($order->getDateOrdered()) . "</li>";
+                    $orderDetails = OrderDB::getOrderWithProduct($order->getOrderId()); // Fetch products in the order
+                    
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($order->getOrderId()) . "</td>";
+                    echo "<td>$" . number_format($order->getTotalCost(), 2) . "</td>";
+                    echo "<td>" . htmlspecialchars($order->getDateOrdered()) . "</td>";
+                    echo "<td>";
+                    
+                    if (!empty($orderDetails)) {
+                        echo "<ul>";
+                        foreach ($orderDetails as $detail) {
+                            echo "<li>" . htmlspecialchars($detail['Description']) . 
+                                 " - " . htmlspecialchars($detail['Quantity']) . " x $" . 
+                                 number_format($detail['Price'], 2) . "</li>";
+                        }
+                        echo "</ul>";
+                    } else {
+                        echo "No products found.";
+                    }
+
+                    echo "</td>";
+                    echo "</tr>";
                 }
-                echo "</ul>";
+
+                echo "</table>";
             } else {
                 echo "<p>You have not placed any orders yet.</p>";
             }
@@ -70,9 +97,5 @@ require_once('../model/order.php');
             <p>If you need to change your account information, you can <a href="edit_account.php">edit your account</a> or <a href="change_password.php">change your password</a>.</p>
         </section>
     </main>
-
-    <footer>
-        <p>© 2025 Top Form Tees. All rights reserved.</p>
-    </footer>
 </body>
 </html>

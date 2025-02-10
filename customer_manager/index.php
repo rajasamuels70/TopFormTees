@@ -109,7 +109,7 @@ else if ($controllerChoice == 'add_user') {
         include("customer_register.php");
     } else {
         // Create the customer object (you can pass it to the addCustomer method if needed)
-        $customer = new Customer($firstName, $lastName, $emailAddress, $password, $address, $city, $state, $postalCode);
+        $customer = new Customer(-1, $firstName, $lastName, $address, $city, $state, $postalCode, $emailAddress, $password);
 
         // Add the user to the database
         $result = CustomerDB::addCustomer($customer);

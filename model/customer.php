@@ -20,8 +20,8 @@ class Customer {
     // Constructor
     // Constructor
     public function __construct(
-        $firstName, $lastName, $address, $city, $state, $zip, $emailAddress, 
-        $password, $userName = null, $id = null, $customerRoleTypeId = null, 
+        $id, $firstName, $lastName, $address, $city, $state, $zip, $emailAddress, 
+        $password, $customerRoleTypeId = 2, 
         $dateAdded = null, $dateUpdated = null
     ) {
         $this->id = $id;
@@ -33,7 +33,6 @@ class Customer {
         $this->state = $state;
         $this->zip = $zip;
         $this->emailAddress = $emailAddress;
-        $this->userName = $userName;
         $this->password = $password;
         $this->dateAdded = $dateAdded;
         $this->dateUpdated = $dateUpdated;

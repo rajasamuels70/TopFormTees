@@ -10,25 +10,27 @@ class CustomerDB{
         $statement->execute();
         
         // Fetch customer data
-        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        //$row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $row = $statement->fetch();
         $statement->closeCursor();
-
+        
+        $firstName = $row['FirstName'];
+        
+        
         if ($row) {
             // Create and return a Customer object
             $customer = new Customer(
-                $row['id'],
-                $row['customerRoleTypeId'],
-                $row['firstName'],
-                $row['lastName'],
-                $row['address'],
-                $row['city'],
-                $row['state'],
-                $row['zip'],
-                $row['emailAddress'],
-                $row['userName'],
-                $row['password'],
-                $row['dateAdded'],
-                $row['dateUpdated']
+                $row['ID'],
+                $row['FirstName'],
+                $row['LastName'],
+                $row['Address'],
+                $row['City'],
+                $row['State'],
+                $row['Zip'],
+                $row['EmailAddress'],
+                $row['Password'],
+                $row['CustomerRoleTypeId'],
+                $row['DateAdded'],
             );
             return $customer;     
         }
@@ -47,9 +49,9 @@ class CustomerDB{
 
         // SQL query to insert a new customer
         $query = 'INSERT INTO customer 
-            (customerRoleTypeID, firstName, lastName, address, city, state, zip, emailAddress, userName, password, dateAdded, dateUpdated)
+            (customerRoleTypeID, firstName, lastName, address, city, state, zip, emailAddress, userName, password, dateAdded)
             VALUES 
-            (:customerRoleTypeID, :firstName, :lastName, :address, :city, :state, :zip, :emailAddress, :userName, :password, NOW(), NOW())';
+            (:customerRoleTypeID, :firstName, :lastName, :address, :city, :state, :zip, :emailAddress, :userName, :password, NOW())';
 
         // Prepare the statement
         $statement = $db->prepare($query);
