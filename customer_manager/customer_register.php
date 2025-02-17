@@ -10,7 +10,7 @@
     echo "<p style='color:green;'>" . htmlspecialchars($_GET['successMessage']) . "</p>";
 } ?>
 <head>
-        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/registration.css">
     </head>
 
 <form method="POST" action="customer_manager/index.php">

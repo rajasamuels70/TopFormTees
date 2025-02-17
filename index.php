@@ -12,7 +12,7 @@ require_once 'view/header.php';
         <br>
         <br>
         <br>
-        <a href="product_manager?controllerRequest=view_product" class="cta-button">Shop Now</a>
+        <a href="product_manager?controllerRequest=product_listing" class="cta-button">Shop Now</a>
     </section>
 </main>
 

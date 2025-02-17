@@ -5,49 +5,42 @@ body {
     color: #d3d3d3; /* Light gray text */
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
-/* Registration Form Container */
-.register-container {
-    background-color: #222; /* Darker gray */
+/* Register Section */
+h1 {
+    text-align: center;
+    margin-top: 50px;
+    color: #d3d3d3;
+    font-size: 2rem;
+}
+
+fieldset {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    background-color: #222; /* Darker gray background */
     padding: 30px;
-    max-width: 500px;
-    width: 100%;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Form Heading */
-h1 {
-    text-align: center;
-    color: #fff;
-    margin-bottom: 20px;
+/* Form Styling */
+form {
+    background-color: #222; /* Darker gray */
+    padding: 30px;
+    max-width: 500px;
+    margin: 30px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Error and Success Messages */
-p {
-    text-align: center;
-    font-size: 1rem;
-    margin-bottom: 15px;
-}
-
-p[style*='color:red'] {
-    color: #ff6347; /* Tomato red */
-}
-
-p[style*='color:green'] {
-    color: #32cd32; /* Lime green */
-}
-
-/* Form Fields */
 label {
+    font-size: 1.2rem;
     display: block;
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 input[type="text"],
@@ -55,6 +48,7 @@ input[type="email"],
 input[type="password"] {
     width: 100%;
     padding: 10px;
+    margin-top: 5px;
     margin-bottom: 15px;
     background-color: #333; /* Darker gray */
     border: 1px solid #555;
@@ -67,7 +61,7 @@ input[type="password"] {
 input[type="submit"] {
     width: 100%;
     padding: 12px;
-    background-color: #000; /* Black */
+    background-color: #000;
     color: #fff;
     border: none;
     font-size: 1.2rem;
@@ -77,5 +71,18 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #444; /* Medium gray */
+    background-color: #444;
+}
+
+/* Error and Success Messages */
+p.error {
+    color: #ff6347; /* Tomato red */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p.success {
+    color: #32cd32; /* Green */
+    text-align: center;
+    margin-bottom: 20px;
 }

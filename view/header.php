@@ -14,7 +14,7 @@
                 <li><a href="index.php">Home</a></li>
                 <li><a href="customer_manager?controllerRequest=login_user">Login</a></li>
                 <li><a href="customer_manager?controllerRequest=add_user">Register</a></li>
-                <li><a href="product_manager?controllerRequest=view_product">Shop</a></li>
+                <li><a href="product_manager?controllerRequest=product_listing">Shop</a></li>
                 <li><a href="customer_manager?controllerRequest=contact_us">Contact Us</a></li>
                 <li><a href="customer_manager?controllerRequest=logout">Logout</a></li>
             </ul>
