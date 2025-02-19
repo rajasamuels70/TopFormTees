@@ -16,4 +16,15 @@ class ProductDB {
             return []; // Return empty array if there’s an error
         }
     }
+    public static function getProductById($productID) {
+        $db = Database::getDB();
+        $query = "SELECT * FROM product WHERE ProductID = :productID";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':productID', $productID, PDO::PARAM_INT);
+        $statement->execute();
+        $product = $statement->fetch(PDO::FETCH_ASSOC);
+        $statement->closeCursor();
+        return $product;
+    }
+
 }

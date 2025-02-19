@@ -20,8 +20,10 @@ $products = ProductDB::getAllProducts();
                          alt="<?php echo htmlspecialchars($product['Description']); ?>">
                     <h3><?php echo htmlspecialchars($product['Description']); ?></h3>
                     <p class="price">$<?php echo number_format($product['Price'], 2); ?></p>
-                    <a href="?controllerRequest=product_detail&id=<?php echo htmlspecialchars($product['ProductID']); ?>" 
-                       class="view-details">View Details</a>
+                    <a href="index.php?controllerRequest=product_detail&id=<?php echo htmlspecialchars($product['ProductID']); ?>" 
+                        class="view-details">View Details</a>
+
+
                 </div>
                 <?php
             }
