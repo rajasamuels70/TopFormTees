@@ -5,10 +5,10 @@ require_once '../model/product_db.php';
 
 
 // Get product ID from URL
-$productID = isset($_GET['id']) ? intval($_GET['id']) : 0;
+//$productID = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // Fetch product details
-$product = ProductDB::getProductById($productID);
+//$product = ProductDB::getProductById($productID);
 
 if (!$product) {
     echo "<p class='error'>Product not found.</p>";

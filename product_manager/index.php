@@ -1,11 +1,7 @@
 <?php
 
-//$lifetime = 60 * 60 * 24 * 14;
-//session_set_cookie_params($lifetime, '/');
 require_once('../model/database.php');
-require_once('../model/product_db.php');  // Assuming product_db handles DB interactions
-
-//session_start();
+require_once('../model/product_db.php'); 
 
 $controllerChoice = filter_input(INPUT_POST, 'controllerRequest');
 if ($controllerChoice == NULL) {
@@ -15,30 +11,35 @@ if ($controllerChoice == NULL) {
     }
 }
 
-if ($controllerChoice == 'product_listing') {
-    // Fetch products (this could be done via the product_db model)
-    $products = ProductDB::getAllProducts(); // Assuming this returns an array of products
+// Debugging Output - Remove after testing
+error_log("Controller Request: " . $controllerChoice);
 
-    // Load the products view
+if ($controllerChoice == 'product_listing') {
+    $products = ProductDB::getAllProducts();
     include('product_listing.php');
 } 
 
 else if ($controllerChoice == 'product_detail') {
     // Fetch the product details
-    $productId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-    $product = ProductDB::getProductById($productId); // Fetch product by ID
+    $productID = filter_input(INPUT_GET, 'ProductID', FILTER_VALIDATE_INT);
 
-    if ($product === null) {
-        $errorMessage = "Product not found.";
-        include('product_listing.php'); // Display the error on product listing page
+    if ($productID) {
+        $product = ProductDB::getProductById($productID);
+        
+        if ($product) {
+            
+            include('product_detail.php'); // Load product details
+        } else {
+            $errorMessage = "Product not found.";
+            include('product_listing.php'); // Redirect to product list
+        }
     } else {
-        // Load the product detail page
-        include('product_detail.php');
+        $errorMessage = "Invalid product ID.";
+        include('product_listing.php');
     }
-} 
+}
 
 else {
-    // Default action, could be an error or a home page redirect
-    include('index.php');
+    include('index.php'); // Default homepage redirect
 }
 ?>
