@@ -15,7 +15,7 @@
                 <li><a href="customer_manager?controllerRequest=login_user">Login</a></li>
                 <li><a href="customer_manager?controllerRequest=add_user">Register</a></li>
                 <li><a href="product_manager?controllerRequest=product_listing">Shop</a></li>
-                <li><a href="product_manager?controllerRequest=cart.php">Cart (<?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>)</a></li>
+                <li><a href="product_manager?controllerRequest=view_cart">Cart (<?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>)</a></li>
                 <li><a href="customer_manager?controllerRequest=contact_us">Contact Us</a></li>
                 <li><a href="customer_manager?controllerRequest=logout">Logout</a></li>
             </ul>

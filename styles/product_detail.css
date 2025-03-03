@@ -47,7 +47,7 @@ body {
 
 .price {
     font-size: 1.5rem;
-    color: #32cd32;
+    color: white;
     font-weight: bold;
 }
 
@@ -109,18 +109,47 @@ body {
 
 /* Add to Cart Button */
 .add-to-cart {
-    background-color: #32cd32;
-    color: #000;
+    background-color: #000;
+    color: #fff;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 1rem;
-    transition: background-color 0.3s ease;
-    margin-top: 2em;
+    transition: background-color 0.3s;
+    margin-top: 1em;
     margin-left: 4.5em;
+    width: 118px;
 }
 
 .add-to-cart:hover {
-    background-color: #28a428;
+    background-color: #444;
 }
+.view-cart{
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin-top: 1em;
+    margin-left: 4.5em;
+    width: 118px;
+}
+/*button {
+    width: 100%;
+    padding: 12px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}*/
+
+button:hover {
+    background-color: #444;
+}
+

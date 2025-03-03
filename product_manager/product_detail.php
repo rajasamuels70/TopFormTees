@@ -88,8 +88,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <button type="submit" class="add-to-cart">Add to Cart</button>
             </form>
+            <!-- View Cart Button (Styled to Match Your Design) -->
+            
         </div>
     </div>
+                <a href="product_manager?controllerRequest=view_cart">
+                    <button type="submit" class="view-cart">View Cart</button>
+                </a>
 </section>
 <?php require_once '../view/footer.php'; ?>
 </body>

@@ -1,67 +1,100 @@
-<?php 
+<?php
 session_start();
-require_once '../view/header.php'; 
+require_once '../view/header.php'; // Include site header for consistency
 
-// Remove item from cart
-if (isset($_GET['remove'])) {
-    $removeID = intval($_GET['remove']);
+// Ensure the cart is initialized
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+// Handle Remove Item
+if (isset($_POST['remove_id'])) {
+    $removeID = intval($_POST['remove_id']);
     foreach ($_SESSION['cart'] as $key => $item) {
         if ($item['id'] == $removeID) {
             unset($_SESSION['cart'][$key]);
+            $_SESSION['cart'] = array_values($_SESSION['cart']); // Re-index array
             break;
         }
     }
-    $_SESSION['cart'] = array_values($_SESSION['cart']); // Re-index array
 }
 
-// Clear cart
-if (isset($_GET['clear'])) {
-    unset($_SESSION['cart']);
+// Handle Update Quantities
+if (isset($_POST['update_cart'])) {
+    foreach ($_POST['quantity'] as $id => $qty) {
+        foreach ($_SESSION['cart'] as &$item) {
+            if ($item['id'] == $id) {
+                $item['quantity'] = max(1, intval($qty)); // Ensure min quantity of 1
+                break;
+            }
+        }
+    }
+}
+
+// Calculate total cart price
+$totalPrice = 0;
+foreach ($_SESSION['cart'] as $item) {
+    $totalPrice += $item['price'] * $item['quantity'];
 }
 ?>
 
-<section class="cart">
-    <h2>Your Shopping Cart</h2>
+<!-- Link to Cart Stylesheet -->
+<link rel="stylesheet" href="styles/cart.css">
 
-    <?php if (empty($_SESSION['cart'])): ?>
+<div class="cart-container">
+    <h2>Shopping Cart</h2>
+
+    <?php if (empty($_SESSION['cart'])) : ?>
         <p class="empty-cart">Your cart is empty.</p>
-    <?php else: ?>
-        <table class="cart-table">
-            <thead>
+        <div class="cart-buttons">
+            <a href="product_manager?controllerRequest=product_listing">
+                <button class="continue">Continue Shopping</button>
+            </a>
+        </div>
+    <?php else : ?>
+        <form method="POST">
+            <table class="cart-table">
                 <tr>
-                    <th>Image</th>
                     <th>Product</th>
+                    <th>Size</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Subtotal</th>
                     <th>Action</th>
                 </tr>
-            </thead>
-            <tbody>
-                <?php 
-                $total = 0;
-                foreach ($_SESSION['cart'] as $item): 
-                    $subtotal = $item['price'] * $item['quantity'];
-                    $total += $subtotal;
-                ?>
+
+                <?php foreach ($_SESSION['cart'] as $item) : ?>
                     <tr>
-                        <td><img src="../images/<?php echo htmlspecialchars($item['image']); ?>" width="50"></td>
                         <td><?php echo htmlspecialchars($item['name']); ?></td>
+                        <td><?php echo htmlspecialchars($item['size']); ?></td>
                         <td>$<?php echo number_format($item['price'], 2); ?></td>
                         <td><?php echo $item['quantity']; ?></td>
-                        <td>$<?php echo number_format($subtotal, 2); ?></td>
+                        <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
                         <td>
-                            <a href="cart.php?remove=<?php echo $item['id']; ?>" class="remove-item">Remove</a>
+                            <button type="submit" name="remove_id" value="<?php echo $item['id']; ?>" class="remove-button">Remove</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
-            </tbody>
-        </table>
 
-        <p class="total-price">Total: $<?php echo number_format($total, 2); ?></p>
-        <a href="cart.php?clear=1" class="clear-cart">Clear Cart</a>
-        <button class="checkout">Proceed to Checkout</button>
+                <tr>
+                    <td colspan="3" align="right"><strong>Total:</strong></td>
+                    <td><strong>$<?php echo number_format($totalPrice, 2); ?></strong></td>
+                    <td></td>
+                </tr>
+            </table>
+
+        </form>
+        <div class="cart-buttons">
+                <button type="submit" name="update_cart" class="update">Update Cart</button>
+                
+                <a href="product_manager?controllerRequest=product_listing">
+                    <button class="continue">Continue Shopping</button>
+                </a>
+                <a href="product_manager?controllerRequest=checkout_cart">
+                    <button class="checkout">Proceed to Checkout</button>
+                </a>
+        </div>
     <?php endif; ?>
-</section>
+</div>
 
-<?php require_once '../view/footer.php'; ?>
+<?php require_once '../view/footer.php'; // Include footer for consistent design ?>
