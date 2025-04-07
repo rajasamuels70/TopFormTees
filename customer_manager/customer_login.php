@@ -1,4 +1,4 @@
-<?php require_once '../view/header.php'; ?>
+pass<?php require_once '../view/header.php'; ?>
 <div class="pleaselogin">
     <h1>Please Log in</h1>
     <p>Get the lowest prices, order tracking, and quicker checkouts</p>   

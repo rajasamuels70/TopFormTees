@@ -1,6 +1,13 @@
 body {
     background-color: black;
 }
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
 
 /* Cart Page Styling - Full Dark Theme */
 .cart-container {

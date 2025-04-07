@@ -30,7 +30,7 @@ class CustomerDB{
                 $row['EmailAddress'],
                 $row['Password'],
                 $row['CustomerRoleTypeId'],
-                $row['DateAdded'],
+                $row['DateCreated'],
             );
             return $customer;     
         }
@@ -49,7 +49,7 @@ class CustomerDB{
 
         // SQL query to insert a new customer
         $query = 'INSERT INTO customer 
-            (customerRoleTypeID, firstName, lastName, address, city, state, zip, emailAddress, userName, password, dateAdded)
+            (customerRoleTypeID, firstName, lastName, address, city, state, zip, emailAddress, userName, password, dateCreated)
             VALUES 
             (:customerRoleTypeID, :firstName, :lastName, :address, :city, :state, :zip, :emailAddress, :userName, :password, NOW())';
 

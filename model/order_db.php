@@ -100,13 +100,14 @@ class OrderDB {
     }
 
     public static function addOrder($customerId, $shippingAddress, $shippingCity, 
-                                    $shippingState, $shippingZip, $totalCost, 
-                                    $shippingFee, $tax, $paymentAuthorization) {
+                                $shippingState, $shippingZip, $totalCost, 
+                                $shippingFee, $tax, $paymentAuthorization) {
         $db = Database::getDB();
         $query = "INSERT INTO orders (CustomerID, ShippingAddress, ShippingCity, ShippingState, 
                                        ShippingZip, TotalCost, ShippingFee, Tax, PaymentAuthorization, DateOrdered) 
                   VALUES (:customerId, :shippingAddress, :shippingCity, :shippingState, 
                           :shippingZip, :totalCost, :shippingFee, :tax, :paymentAuthorization, NOW())";
+
         $statement = $db->prepare($query);
         $statement->bindValue(':customerId', $customerId, PDO::PARAM_INT);
         $statement->bindValue(':shippingAddress', $shippingAddress, PDO::PARAM_STR);
@@ -117,10 +118,14 @@ class OrderDB {
         $statement->bindValue(':shippingFee', $shippingFee, PDO::PARAM_STR);
         $statement->bindValue(':tax', $tax, PDO::PARAM_STR);
         $statement->bindValue(':paymentAuthorization', $paymentAuthorization, PDO::PARAM_STR);
-        $result = $statement->execute();
+
+        $statement->execute();
+        $orderId = $db->lastInsertId(); // Get the ID of the newly inserted order
         $statement->closeCursor();
-        return $result;
-    }
+
+        return $orderId;
+}
+
 
     public static function deleteOrder($orderId) {
         $db = Database::getDB();

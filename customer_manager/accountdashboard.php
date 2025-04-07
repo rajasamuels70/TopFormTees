@@ -1,8 +1,8 @@
 <?php
 // Ensure session is started only if it's not already active
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+//if (session_status() == PHP_SESSION_NONE) {
+//    session_start();
+//}
 
 // Ensure customer is logged in and is an instance of Customer
 if (!isset($_SESSION['customer']) || !($_SESSION['customer'] instanceof Customer)) {

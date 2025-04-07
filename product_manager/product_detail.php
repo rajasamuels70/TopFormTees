@@ -1,5 +1,5 @@
 <?php 
-session_start();
+//session_start();
 require_once '../view/header.php';
 
 // At this point, $product has been fetched by the controller.
