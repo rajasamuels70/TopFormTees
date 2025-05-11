@@ -1,0 +1,222 @@
+/* Checkout Page Styles - Matches Shopping Cart Look */
+
+body {
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.checkout-section {
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.card {
+    background: #333;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.cart-list {
+    list-style-type: none;
+    padding: 0;
+    background: #333;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #555;
+    color: white;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-price {
+    color: white;
+}
+
+.total-price {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 10px;
+    color: white;
+}
+
+.payment-options {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.payment-options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Improved Credit Card Form Styles */
+#credit-card-form {
+    display: none;
+    background: #444;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    margin: 15px auto 0;
+    text-align: left;
+    width: 80%;
+    max-width: 400px; /* Makes form more compact */
+}
+
+/* Card Form Title */
+#credit-card-form h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: white;
+    text-align: center;
+}
+
+/* Card Type Dropdown */
+#card-type {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #222;
+    color: white;
+    margin-bottom: 10px;
+    appearance: none; /* Removes default dropdown styling */
+}
+
+/* Input Fields */
+#card-expiry,
+#card-cvv {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    background: #f8f9fa;
+    color: #222;
+    margin-bottom: 10px;
+}
+#card-number{
+    width: 93%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    background: #f8f9fa;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+/* Expiry & CVV Layout */
+.card-details {
+    display: flex;
+    gap: 10px;
+}
+
+.card-details input {
+    flex: 1;
+}
+
+/* Auto-format for card number */
+#card-number {
+    letter-spacing: .2px;
+
+}
+
+/* Validation Result */
+#card-result {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Restore Original Place Order Button Style */
+.btn {
+    display: inline-block;
+    width: 90%;
+    padding: 12px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Modern Checkout Button for Card Validation */
+#validate-card {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    background-color: #28a745; /* Green to indicate validation */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#validate-card:hover {
+    background-color: #218838;
+}
+
+/* PayPal Button Styling */
+#paypal-button-container {
+    margin-top: 15px;
+    text-align: center;
+    display: none;
+}
+
+/* Error Messages */
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Keep Headers White */
+.checkout-section h3 {
+    color: white;
+}
